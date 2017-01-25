@@ -18,7 +18,7 @@ public class Board{
         return isInside(position[0], position[1]);
     }
 
-    public boolean isInside(int x, int y) {
+    public boolean isInside(int x, int y) { // checkfor !(All conditions that marks the piece fall out of board)
         return !(x < 0 || x >= BOARD_HEIGHT
                 || y < 0 || y >= BOARD_WIDTH);
     }

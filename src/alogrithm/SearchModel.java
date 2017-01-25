@@ -19,6 +19,7 @@ public class SearchModel {
 
     public AlphaBetaNode search(Board board) {
         this.board = board;
+        // depending on the pieces left, the decision depth changes.
         if (board.pieces.size() < 28)
             DEPTH = 3;
         if (board.pieces.size() < 16)
@@ -104,10 +105,10 @@ public class SearchModel {
         ArrayList<AlphaBetaNode> moves = new ArrayList<AlphaBetaNode>();
         for (Map.Entry<String, Piece> stringPieceEntry : board.pieces.entrySet()) {
             Piece piece = stringPieceEntry.getValue();
-            if (isMax && piece.color == 'r') continue;
-            if (!isMax && piece.color == 'b') continue;
+            if (isMax && piece.color == 'r') continue; // if Max? dont consider the move if piece is red
+            if (!isMax && piece.color == 'b') continue; // if not Max? dont consider the movie if piece is black?
             for (int[] nxt : Rules.getNextMove(piece.key, piece.position, board))
-                moves.add(new AlphaBetaNode(piece.key, piece.position, nxt));
+                moves.add(new AlphaBetaNode(piece.key, piece.position, nxt)); // stored in an alphabeta node { piece(bs1), from, to, value}
         }
         return moves;
     }

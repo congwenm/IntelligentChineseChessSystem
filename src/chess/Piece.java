@@ -10,6 +10,9 @@ public class Piece implements Cloneable {
     public char character;
     public char index;
     public int[] position = new int[2];
+    // position [y, x] y is top down such
+    // 0 0
+    // 1 1
 
     public Piece(String name, int[] position) {
         this.key = name;
