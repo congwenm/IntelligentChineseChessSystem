@@ -18,7 +18,7 @@ public class Board{
         return isInside(position[0], position[1]);
     }
 
-    public boolean isInside(int x, int y) {
+    public boolean isInside(int x, int y) { // checkfor !(All conditions that marks the piece fall out of board)
         return !(x < 0 || x >= BOARD_HEIGHT
                 || y < 0 || y >= BOARD_WIDTH);
     }
@@ -40,16 +40,16 @@ public class Board{
 
     public Piece updatePiece(String key, int[] newPos) {
         Piece orig = pieces.get(key);
-        Piece inNewPos = getPiece(newPos);
+        Piece inNewPos = getPiece(newPos); // Return the killed piece or null, find if there are any pieces at the current move
         /* If the new slot has been taken by another piece, then it will be killed.*/
         if (inNewPos != null)
             pieces.remove(inNewPos.key);
         /* Clear original slot and updatePiece new slot.*/
         int[] origPos = orig.position;
-        cells[origPos[0]][origPos[1]] = null;
-        cells[newPos[0]][newPos[1]] = orig;
-        orig.position = newPos;
-        player = (player == 'r') ? 'b' : 'r';
+        cells[origPos[0]][origPos[1]] = null; // empty original piece position
+        cells[newPos[0]][newPos[1]] = orig; // move piece to new position
+        orig.position = newPos;         // update piece's position
+        player = (player == 'r') ? 'b' : 'r'; // simulating a swap of turn?
         return inNewPos;
     }
 

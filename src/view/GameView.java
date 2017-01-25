@@ -85,14 +85,14 @@ public class GameView {
 
     public void movePieceFromAI(String pieceKey, int[] to) {
         Piece inNewPos = board.getPiece(to);
-        if (inNewPos != null) {
+        if (inNewPos != null) { // if the destination has a unit, destroy taht unit, ( we trust our algorithm to not select a unit for friendly fire
             pane.remove(pieceObjects.get(inNewPos.key));
             pieceObjects.remove(inNewPos.key);
         }
 
-        JLabel pieceObject = pieceObjects.get(pieceKey);
-        int[] sPos = modelToViewConverter(to);
-        pieceObject.setLocation(sPos[0], sPos[1]);
+        JLabel pieceObject = pieceObjects.get(pieceKey); // creates UI for the piece with the key info
+        int[] sPos = modelToViewConverter(to);        // calc its position on the screen with its position
+        pieceObject.setLocation(sPos[0], sPos[1]);  // place it
 
         /* Clear 'from' and 'to' info on the board */
         selectedPieceKey = null;

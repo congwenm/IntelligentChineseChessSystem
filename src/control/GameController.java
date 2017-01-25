@@ -85,8 +85,8 @@ public class GameController {
         SearchModel searchModel = new SearchModel();
         AlphaBetaNode result = searchModel.search(board);
 
-        view.movePieceFromAI(result.piece, result.to);
-        board.updatePiece(result.piece, result.to);
+        view.movePieceFromAI(result.piece, result.to); // one best move is used to move the piece
+        board.updatePiece(result.piece, result.to);     // finally updates the piece
     }
 
 

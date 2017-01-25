@@ -30,6 +30,8 @@ public class ChessGame {
         while (controller.hasWin(board) == 'x') {
             view.showPlayer('r');
             /* User in. */
+
+            // user playing a move would break this sentinel loop.
             while (board.player == 'r')
                 Thread.sleep(1000);
 
