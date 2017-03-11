@@ -85,7 +85,7 @@ public class SearchModel {
                         beta = temp[0];
                     }
                 }
-                else {
+                else { // recursion
                     if (isMax) alpha = Math.max(alpha, alphaBeta(depth - 1, alpha, beta, false));
                     else beta = Math.min(beta, alphaBeta(depth - 1, alpha, beta, true));
                 }

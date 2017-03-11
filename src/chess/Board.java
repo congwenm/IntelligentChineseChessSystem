@@ -53,6 +53,7 @@ public class Board{
         return inNewPos;
     }
 
+    // return the position
     public boolean backPiece(String key) {
         int[] origPos = pieces.get(key).position;
         cells[origPos[0]][origPos[1]] = pieces.get(key);
