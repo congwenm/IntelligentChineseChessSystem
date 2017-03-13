@@ -27,7 +27,7 @@ public class Rules {
                 return xRules();
             case 's': // shi, guard
                 return sRules();
-            case 'b':
+            case 'b': // Boss, General
                 return bRules();
             case 'z': // zu, pawn
                 return zRules();

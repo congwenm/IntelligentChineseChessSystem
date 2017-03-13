@@ -12,7 +12,12 @@ import java.util.Map;
 public class EvalModel {
     /*  [red, black] >> [PieceValue, PiecePosition, PieceControl, PieceFlexible, PieceProtect, PieceFeature]*/
     /* However, only PieceValue and PiecePosition are implemented, so the array size is set to 2. */
+	// values[0] is red, values[1] is black
     private int[][] values = new int[2][2];
+
+	//[
+	//	[]
+	//]
 
     /**
      * @param player, eval the situation in player's perspective.
@@ -23,19 +28,19 @@ public class EvalModel {
             /* The table in PiecePosition is for red player in default. To eval black player, needs to perform a mirror transformation. */
             int[] reversePosition = new int[]{board.BOARD_HEIGHT - 1 - piece.position[0], piece.position[1]};
             switch (piece.character) {
-                case 'b':
+                case 'b': // General
                     if (piece.color == 'r') values[0][0] += evalPieceValue(0);
-                    else values[1][0] += evalPieceValue(0);
+                    else values[1][0] += evalPieceValue(0); // piece is black
                     break;
-                case 's':
+                case 's': // Guard
                     if (piece.color == 'r') values[0][0] += evalPieceValue(1);
                     else values[1][0] += evalPieceValue(1);
                     break;
-                case 'x':
+                case 'x': // Minister
                     if (piece.color == 'r') values[0][0] += evalPieceValue(2);
                     else values[1][0] += evalPieceValue(2);
                     break;
-                case 'm':
+                case 'm': // Knight
                     if (piece.color == 'r') {
                         values[0][0] += evalPieceValue(3);
                         values[0][1] += evalPiecePosition(3, piece.position);
@@ -44,7 +49,7 @@ public class EvalModel {
                         values[1][1] += evalPiecePosition(3, reversePosition);
                     }
                     break;
-                case 'j':
+                case 'j': // Chariot
                     if (piece.color == 'r') {
                         values[0][0] += evalPieceValue(4);
                         values[0][1] += evalPiecePosition(4, piece.position);
@@ -53,7 +58,7 @@ public class EvalModel {
                         values[1][1] += evalPiecePosition(4, reversePosition);
                     }
                     break;
-                case 'p':
+                case 'p': // Cannon
                     if (piece.color == 'r') {
                         values[0][0] += evalPieceValue(5);
                         values[0][1] += evalPiecePosition(5, piece.position);
@@ -62,7 +67,7 @@ public class EvalModel {
                         values[1][1] += evalPiecePosition(5, reversePosition);
                     }
                     break;
-                case 'z':
+                case 'z': // Pawn
                     if (piece.color == 'r') {
                         values[0][0] += evalPieceValue(6);
                         values[0][1] += evalPiecePosition(6, piece.position);
@@ -92,7 +97,7 @@ public class EvalModel {
 
     private int evalPiecePosition(int p, int[] pos) {
         int[][] pPosition = new int[][]{
-                {6, 4, 0, -10, -12, -10, 0, 4, 6},
+                {6, 4, 0, -10, -12, -10, 0, 4, 6}, // higher up is enemy camp
                 {2, 2, 0, -4, -14, -4, 0, 2, 2},
                 {2, 2, 0, -10, -8, -10, 0, 2, 2},
                 {0, 0, -2, 4, 10, 4, -2, 0, 0},
